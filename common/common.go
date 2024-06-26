@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	adminTemplate "github.com/GoAdminGroup/go-admin/template"
+	"github.com/go-hq/go-admin/modules/config"
+	adminTemplate "github.com/go-hq/go-admin/template"
 )
 
 type BaseTheme struct {
@@ -25,7 +25,12 @@ func (b *BaseTheme) GetRequirements() []string {
 	return []string{">=v1.2.19"}
 }
 
-var comps = []string{"datatable.min.js", "form.min.js", "tree.min.js", "treeview.min.js"}
+var comps = []string{
+	"datatable.min.js",
+	"form.min.js",
+	"tree.min.js",
+	"treeview.min.js",
+}
 
 func inArray(s string, arr []string) bool {
 	for _, v := range arr {
@@ -97,7 +102,8 @@ func (b *BaseTheme) GetTemplate(isPjax bool) (tmpl *template.Template, name stri
 					root+b.TemplateList["js"]+".tmpl",
 					root+b.TemplateList["menu"]+".tmpl",
 					root+b.TemplateList["admin_panel"]+".tmpl",
-					root+b.TemplateList["content"]+".tmpl")
+					root+b.TemplateList["content"]+".tmpl",
+				)
 		} else {
 			name = "content"
 			tmpl, err = template.New("content").Funcs(adminTemplate.DefaultFuncMap).
@@ -107,10 +113,12 @@ func (b *BaseTheme) GetTemplate(isPjax bool) (tmpl *template.Template, name stri
 		if !isPjax {
 			name = "layout"
 			tmpl, err = template.New("layout").Funcs(adminTemplate.DefaultFuncMap).
-				Parse(b.TemplateList["layout"] +
-					b.TemplateList["head"] + b.TemplateList["header"] + b.TemplateList["sidebar"] +
-					b.TemplateList["footer"] + b.TemplateList["js"] + b.TemplateList["menu"] +
-					b.TemplateList["admin_panel"] + b.TemplateList["content"])
+				Parse(
+					b.TemplateList["layout"] +
+						b.TemplateList["head"] + b.TemplateList["header"] + b.TemplateList["sidebar"] +
+						b.TemplateList["footer"] + b.TemplateList["js"] + b.TemplateList["menu"] +
+						b.TemplateList["admin_panel"] + b.TemplateList["content"],
+				)
 		} else {
 			name = "content"
 			tmpl, err = template.New("content").Funcs(adminTemplate.DefaultFuncMap).

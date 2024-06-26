@@ -4,11 +4,11 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/modules/language"
-	"github.com/GoAdminGroup/go-admin/template/components"
-	"github.com/GoAdminGroup/go-admin/template/types"
-	"github.com/GoAdminGroup/themes/sword"
-	"github.com/GoAdminGroup/themes/sword/resource"
+	"github.com/go-hq/go-admin/modules/language"
+	"github.com/go-hq/go-admin/template/components"
+	"github.com/go-hq/go-admin/template/types"
+	"github.com/go-hq/themes/sword"
+	"github.com/go-hq/themes/sword/resource"
 )
 
 type Theme struct {
@@ -34,55 +34,61 @@ func (Theme) GetTemplate(isPjax bool) (tmpler *template.Template, name string) {
 
 	if !isPjax {
 		name = "layout"
-		tmpler, err = template.New("layout").Funcs(template.FuncMap{
-			"lang":     language.Get,
-			"langHtml": language.GetFromHtml,
-			"link": func(cdnUrl, prefixUrl, assetsUrl string) string {
-				if cdnUrl == "" {
-					return prefixUrl + assetsUrl
-				}
-				return cdnUrl + assetsUrl
+		tmpler, err = template.New("layout").Funcs(
+			template.FuncMap{
+				"lang":     language.Get,
+				"langHtml": language.GetFromHtml,
+				"link": func(cdnUrl, prefixUrl, assetsUrl string) string {
+					if cdnUrl == "" {
+						return prefixUrl + assetsUrl
+					}
+					return cdnUrl + assetsUrl
+				},
+				"isLinkUrl": func(s string) bool {
+					return (len(s) > 7 && s[:7] == "http://") || (len(s) > 8 && s[:8] == "https://")
+				},
+				"render": func(s, old, repl template.HTML) template.HTML {
+					return template.HTML(strings.Replace(string(s), string(old), string(repl), -1))
+				},
+				"renderJS": func(s template.JS, old, repl template.HTML) template.JS {
+					return template.JS(strings.Replace(string(s), string(old), string(repl), -1))
+				},
+				"divide": func(a, b int) int {
+					return a / b
+				},
 			},
-			"isLinkUrl": func(s string) bool {
-				return (len(s) > 7 && s[:7] == "http://") || (len(s) > 8 && s[:8] == "https://")
-			},
-			"render": func(s, old, repl template.HTML) template.HTML {
-				return template.HTML(strings.Replace(string(s), string(old), string(repl), -1))
-			},
-			"renderJS": func(s template.JS, old, repl template.HTML) template.JS {
-				return template.JS(strings.Replace(string(s), string(old), string(repl), -1))
-			},
-			"divide": func(a, b int) int {
-				return a / b
-			},
-		}).Parse(sword.TemplateList["layout"] +
-			sword.TemplateList["head"] + sword.TemplateList["header"] + sword.TemplateList["sidebar"] +
-			sword.TemplateList["footer"] + sword.TemplateList["js"] + sword.TemplateList["menu"] +
-			sword.TemplateList["admin_panel"] + sword.TemplateList["content"])
+		).Parse(
+			sword.TemplateList["layout"] +
+				sword.TemplateList["head"] + sword.TemplateList["header"] + sword.TemplateList["sidebar"] +
+				sword.TemplateList["footer"] + sword.TemplateList["js"] + sword.TemplateList["menu"] +
+				sword.TemplateList["admin_panel"] + sword.TemplateList["content"],
+		)
 	} else {
 		name = "content"
-		tmpler, err = template.New("content").Funcs(template.FuncMap{
-			"lang":     language.Get,
-			"langHtml": language.GetFromHtml,
-			"link": func(cdnUrl, prefixUrl, assetsUrl string) string {
-				if cdnUrl == "" {
-					return prefixUrl + assetsUrl
-				}
-				return cdnUrl + assetsUrl
+		tmpler, err = template.New("content").Funcs(
+			template.FuncMap{
+				"lang":     language.Get,
+				"langHtml": language.GetFromHtml,
+				"link": func(cdnUrl, prefixUrl, assetsUrl string) string {
+					if cdnUrl == "" {
+						return prefixUrl + assetsUrl
+					}
+					return cdnUrl + assetsUrl
+				},
+				"isLinkUrl": func(s string) bool {
+					return (len(s) > 7 && s[:7] == "http://") || (len(s) > 8 && s[:8] == "https://")
+				},
+				"render": func(s, old, repl template.HTML) template.HTML {
+					return template.HTML(strings.Replace(string(s), string(old), string(repl), -1))
+				},
+				"renderJS": func(s template.JS, old, repl template.HTML) template.JS {
+					return template.JS(strings.Replace(string(s), string(old), string(repl), -1))
+				},
+				"divide": func(a, b int) int {
+					return a / b
+				},
 			},
-			"isLinkUrl": func(s string) bool {
-				return (len(s) > 7 && s[:7] == "http://") || (len(s) > 8 && s[:8] == "https://")
-			},
-			"render": func(s, old, repl template.HTML) template.HTML {
-				return template.HTML(strings.Replace(string(s), string(old), string(repl), -1))
-			},
-			"renderJS": func(s template.JS, old, repl template.HTML) template.JS {
-				return template.JS(strings.Replace(string(s), string(old), string(repl), -1))
-			},
-			"divide": func(a, b int) int {
-				return a / b
-			},
-		}).Parse(sword.TemplateList["admin_panel"] + sword.TemplateList["content"])
+		).Parse(sword.TemplateList["admin_panel"] + sword.TemplateList["content"])
 	}
 
 	if err != nil {
