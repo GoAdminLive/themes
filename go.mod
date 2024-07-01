@@ -1,12 +1,10 @@
-module github.com/go-hq/themes
+module github.com/GoAdminLive/themes
 
 go 1.22
 
-require github.com/go-hq/go-admin v1.2.28
 
 require (
 	github.com/NebulousLabs/fastrand v0.0.0-20181203155948-6fb6489aac4e // indirect
-	github.com/go-hq/html v1.1.1 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect

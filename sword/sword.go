@@ -3,11 +3,11 @@ package sword
 import (
 	"strings"
 
-	adminTemplate "github.com/go-hq/go-admin/template"
-	"github.com/go-hq/go-admin/template/components"
-	"github.com/go-hq/go-admin/template/types"
-	"github.com/go-hq/themes/common"
-	"github.com/go-hq/themes/sword/resource"
+	adminTemplate "github.com/GoAdminLive/go-admin/template"
+	"github.com/GoAdminLive/go-admin/template/components"
+	"github.com/GoAdminLive/go-admin/template/types"
+	"github.com/GoAdminLive/themes/common"
+	"github.com/GoAdminLive/themes/sword/resource"
 )
 
 type Theme struct {
