@@ -1,12 +1,13 @@
 package separation
 
 import (
-	"io/ioutil"
+	"os"
 
 	"github.com/go-hq/go-admin/modules/config"
 	adminTemplate "github.com/go-hq/go-admin/template"
 	"github.com/go-hq/go-admin/template/components"
 	"github.com/go-hq/go-admin/template/types"
+
 	"github.com/go-hq/themes/common"
 	"github.com/go-hq/themes/sword/resource"
 )
@@ -49,7 +50,7 @@ func (t *Theme) GetTmplList() map[string]string {
 }
 
 func (t *Theme) GetAsset(path string) ([]byte, error) {
-	return ioutil.ReadFile(config.GetAssetRootPath() + path)
+	return os.ReadFile(config.GetAssetRootPath() + path)
 }
 
 func (t *Theme) GetAssetList() []string {
