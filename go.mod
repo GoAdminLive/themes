@@ -2,7 +2,7 @@ module github.com/go-hq/themes
 
 go 1.22
 
-require github.com/go-hq/go-admin v1.2.27
+require github.com/go-hq/go-admin v1.2.28
 
 require (
 	github.com/NebulousLabs/fastrand v0.0.0-20181203155948-6fb6489aac4e // indirect
