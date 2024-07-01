@@ -2,8 +2,10 @@ module github.com/GoAdminLive/themes
 
 go 1.22
 
+require github.com/GoAdminLive/go-admin v1.2.31
 
 require (
+	github.com/GoAdminLive/html v0.1.1 // indirect
 	github.com/NebulousLabs/fastrand v0.0.0-20181203155948-6fb6489aac4e // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
