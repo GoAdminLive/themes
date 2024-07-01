@@ -2,7 +2,7 @@ module github.com/GoAdminLive/themes
 
 go 1.22
 
-require github.com/GoAdminLive/go-admin v1.2.31
+require github.com/GoAdminLive/go-admin v0.0.0-20240701152856-1834622bce6c
 
 require (
 	github.com/GoAdminLive/html v0.1.1 // indirect
